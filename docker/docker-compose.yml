@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - dbArgus:/var/lib/postgresql/data
+
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: db7834
+      POSTGRES_DB: argus_db
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 8000:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - db
+
+volumes:
+  dbArgus:
